@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NZTrails.API.Repositories;
 using NZWalks.API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<NZTrailsDbContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("NZTrails"));
 });
+
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
