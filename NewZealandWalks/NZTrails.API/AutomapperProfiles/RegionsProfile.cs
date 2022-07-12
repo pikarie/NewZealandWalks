@@ -11,6 +11,8 @@ namespace NZTrails.API.AutomapperProfiles
 			CreateMap<Region, RegionDto>()
 				//.ForMember(destination => destination.Id, options => options.MapFrom(source => source.IdWithAnotherPropertyName));
 				.ReverseMap();
+			CreateMap<Region, AddRegionDto>().ReverseMap();
+			CreateMap<Region, UpdateRegionDto>().ReverseMap();
 		}
 	}
 }
