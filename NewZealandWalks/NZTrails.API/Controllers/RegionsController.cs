@@ -6,9 +6,9 @@ using NZWalks.API.Models.Domain;
 
 namespace NZTrails.API.Controllers
 {
+	[Route("api/[controller]")]
 	[ApiController]
-	[Route("[controller]")]
-	public class RegionsController : Controller
+	public class RegionsController : ControllerBase
 	{
 		private readonly IRegionRepository regionRepository;
 		private readonly IMapper mapper;

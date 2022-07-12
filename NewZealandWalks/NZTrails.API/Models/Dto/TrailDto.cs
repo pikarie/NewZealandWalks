@@ -1,6 +1,10 @@
-﻿namespace NZWalks.API.Models.Domain
+﻿using Newtonsoft.Json;
+using NZWalks.API;
+using NZWalks.API.Models.Domain;
+
+namespace NZTrails.API.Models.Dto
 {
-	public class Trail
+	public class TrailDto
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
@@ -8,7 +12,6 @@
 		public long? TimeInSeconds { get; set; }
 		public TrailDifficulty? TrailDifficulty { get; set; }
 		public Guid RegionId { get; set; }
-		public Region Region { get; set; }
-		public List<Review> Reviews { get; set; }
+		public List<ReviewDto> Reviews { get; set; }
 	}
 }

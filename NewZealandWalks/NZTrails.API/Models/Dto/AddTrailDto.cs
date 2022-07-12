@@ -1,14 +1,13 @@
-﻿namespace NZWalks.API.Models.Domain
+﻿using NZWalks.API;
+
+namespace NZTrails.API.Models.Dto
 {
-	public class Trail
+	public class AddTrailDto
 	{
-		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public double? Length { get; set; }
 		public long? TimeInSeconds { get; set; }
 		public TrailDifficulty? TrailDifficulty { get; set; }
 		public Guid RegionId { get; set; }
-		public Region Region { get; set; }
-		public List<Review> Reviews { get; set; }
 	}
 }
