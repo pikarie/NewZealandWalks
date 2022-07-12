@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using NZTrails.API.Models.Dto;
 using NZWalks.API.Data;
 using NZWalks.API.Models.Domain;
 
@@ -36,7 +37,7 @@ namespace NZTrails.API.Repositories
 			return region;
 		}
 
-		public async Task<Region?> UpdateAsync(Guid id, Region region)
+		public async Task<Region?> UpdateAsync(Guid id, UpdateRegionDto updateRegionDto)
 		{
 			var regionInDatabase = await GetAsync(id);
 
@@ -45,9 +46,10 @@ namespace NZTrails.API.Repositories
 				return null;
 			}
 
-			mapper.Map(region, regionInDatabase);
-			context.Update(regionInDatabase);
-			await context.SaveChangesAsync();
+			var regionToUpdate = mapper.Map(updateRegionDto, regionInDatabase);
+
+			context.Update(regionToUpdate);
+			await context.SaveChangesAsync(); ;
 
 			return await GetAsync(id);
 		}

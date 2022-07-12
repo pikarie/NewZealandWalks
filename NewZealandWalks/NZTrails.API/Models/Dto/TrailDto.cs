@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using NZWalks.API;
-using NZWalks.API.Models.Domain;
+﻿using NZWalks.API;
 
 namespace NZTrails.API.Models.Dto
 {

@@ -9,6 +9,8 @@ namespace NZTrails.API.AutomapperProfiles
 		public ReviewsProfile()
 		{
 			CreateMap<Review, ReviewDto>().ReverseMap();
+			CreateMap<Review, AddReviewDto>().ReverseMap();
+			CreateMap<Review, UpdateReviewDto>().ReverseMap();
 		}
 	}
 }

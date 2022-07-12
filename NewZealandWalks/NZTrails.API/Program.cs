@@ -21,6 +21,7 @@ builder.Services.AddDbContext<NZTrailsDbContext>(options =>
 
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<ITrailRepository, TrailRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

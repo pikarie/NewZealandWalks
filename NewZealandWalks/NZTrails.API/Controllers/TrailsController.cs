@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NZTrails.API.Models.Dto;
 using NZTrails.API.Repositories;
-using NZWalks.API.Data;
 using NZWalks.API.Models.Domain;
 
 namespace NZTrails.API.Controllers
@@ -28,7 +21,7 @@ namespace NZTrails.API.Controllers
 
 		// GET: api/Trails
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Trail>>> GetTrails()
+		public async Task<ActionResult<IEnumerable<TrailDto>>> GetTrails()
 		{
 			var trails = await trailRepository.GetAllAsync();
 
@@ -42,7 +35,8 @@ namespace NZTrails.API.Controllers
 
 		// GET: api/Trails/5
 		[HttpGet("{id:guid}")]
-		public async Task<ActionResult<Trail>> GetTrail(Guid id)
+		[ActionName(nameof(GetTrail))]
+		public async Task<ActionResult<TrailDto>> GetTrail(Guid id)
 		{
 			var trail = await trailRepository.GetAsync(id);
 
@@ -58,7 +52,7 @@ namespace NZTrails.API.Controllers
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPost]
 		[ActionName(nameof(GetTrail))]
-		public async Task<ActionResult<Trail>> PostTrail(AddTrailDto addTrailDto)
+		public async Task<ActionResult<TrailDto>> PostTrail(AddTrailDto addTrailDto)
 		{
 			var trail = mapper.Map<Trail>(addTrailDto);
 			var newTrail = await trailRepository.AddAsync(trail);
@@ -69,13 +63,10 @@ namespace NZTrails.API.Controllers
 
 		// PUT: api/Trails/5
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-		//TODO: not working at the moment, not sure why. something about the mapping?! We will refactor the mapping soon.
 		[HttpPut("{id:guid}")]
 		public async Task<IActionResult> PutTrail(Guid id, UpdateTrailDto updateTrailDto)
 		{
-			var trail = mapper.Map<Trail>(updateTrailDto);
-
-			var updatedTrail = await trailRepository.UpdateAsync(id, trail);
+			var updatedTrail = await trailRepository.UpdateAsync(id, updateTrailDto);
 
 			if (updatedTrail == null)
 			{

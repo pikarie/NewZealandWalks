@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using NZTrails.API.Models.Dto;
 using NZWalks.API.Data;
 using NZWalks.API.Models.Domain;
 
@@ -42,7 +43,7 @@ namespace NZTrails.API.Repositories
 			return trail;
 		}
 
-		public async Task<Trail?> UpdateAsync(Guid id, Trail trail)
+		public async Task<Trail?> UpdateAsync(Guid id, UpdateTrailDto updateTrailDto )
 		{
 			var trailInDatabase = await GetAsync(id);
 
@@ -51,8 +52,9 @@ namespace NZTrails.API.Repositories
 				return null;
 			}
 
-			mapper.Map(trail, trailInDatabase);
-			context.Update(trailInDatabase);
+			var trailToUpdate = mapper.Map(updateTrailDto, trailInDatabase);
+
+			context.Update(trailToUpdate);
 			await context.SaveChangesAsync();
 
 			return await GetAsync(id);
