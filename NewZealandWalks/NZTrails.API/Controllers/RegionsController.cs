@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using NZTrails.API.Models.Dto;
 using NZTrails.API.Repositories;
+using NZTrails.API.Validators;
 using NZWalks.API.Models.Domain;
 
 namespace NZTrails.API.Controllers
@@ -24,6 +26,7 @@ namespace NZTrails.API.Controllers
 		{
 			var regions = await regionRepository.GetAllAsync();
 
+			//Example of manual mapping vs automapper
 			//var regionsDto = new List<RegionDto>();
 			//regions.ToList().ForEach(region =>
 			//{
@@ -66,13 +69,15 @@ namespace NZTrails.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddRegionAsync(AddRegionDto addRegionDto)
 		{
-			if (!ValidateAddRegion(addRegionDto))
-			{
-				//return BadRequest(ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage)));
-				return BadRequest(ModelState);
-			}
-
 			var region = mapper.Map<Region>(addRegionDto);
+
+			//Example using thte manually private validation method vs using FluentValidation
+			//if (!ValidateAddRegion(addRegionDto))
+			//{
+			//	//return BadRequest(ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage)));
+			//	return BadRequest(ModelState);
+			//}
+			
 			var newRegion = await regionRepository.AddAsync(region);
 			var regionDto = mapper.Map<RegionDto>(newRegion);
 
@@ -83,11 +88,12 @@ namespace NZTrails.API.Controllers
 		[Route("{id:guid}")]
 		public async Task<IActionResult> UpdateRegionAsync(Guid id, UpdateRegionDto updateRegionDto)
 		{
-			if (!ValidateUpdateRegion(updateRegionDto))
-			{
-				//return BadRequest(ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage)));
-				return BadRequest(ModelState);
-			}
+			//Example using thte manually private validation method vs using FluentValidation
+			//if (!ValidateUpdateRegion(updateRegionDto))
+			//{
+			//	//return BadRequest(ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage)));
+			//	return BadRequest(ModelState);
+			//}
 
 			var updatedRegion = await regionRepository.UpdateAsync(id, updateRegionDto);
 

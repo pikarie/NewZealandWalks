@@ -1,5 +1,10 @@
+//TODO: refactor validator to use interfaces and reuse similar RuleFor in multiple validator classes.
+//TODO: Add units tests to this solution.
+
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using NZTrails.API.Repositories;
+using NZTrails.API.Validators;
 using NZWalks.API.Data;
 using System.Text.Json.Serialization;
 
@@ -13,6 +18,11 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddFluentValidation(options =>
+{
+	options.RegisterValidatorsFromAssemblyContaining<Program>();
+});
 
 builder.Services.AddDbContext<NZTrailsDbContext>(options =>
 {

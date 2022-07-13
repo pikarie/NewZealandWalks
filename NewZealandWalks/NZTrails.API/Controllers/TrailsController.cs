@@ -56,6 +56,7 @@ namespace NZTrails.API.Controllers
 		[ActionName(nameof(GetTrail))]
 		public async Task<ActionResult<TrailDto>> PostTrail(AddTrailDto addTrailDto)
 		{
+			//Validating FK with the context + fluentValidator for properties.
 			if (!(await ValidateAddTrailAsync(addTrailDto)))
 			{
 				//return BadRequest(ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage)));
@@ -74,6 +75,7 @@ namespace NZTrails.API.Controllers
 		[HttpPut("{id:guid}")]
 		public async Task<IActionResult> PutTrail(Guid id, UpdateTrailDto updateTrailDto)
 		{
+			//Validating FK with the context + fluentValidator for properties.
 			if (!(await ValidateUpdateTrailAsync(updateTrailDto)))
 			{
 				//return BadRequest(ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage)));
@@ -106,15 +108,15 @@ namespace NZTrails.API.Controllers
 
 		private async Task<bool> ValidateAddTrailAsync(AddTrailDto trailDto)
 		{
-			if (trailDto == null)
-			{
-				ModelState.AddModelError(nameof(trailDto), $"(custom message!) Trail data is required.");
-			}
+			//if (trailDto == null)
+			//{
+			//	ModelState.AddModelError(nameof(trailDto), $"(custom message!) Trail data is required.");
+			//}
 
-			if (string.IsNullOrWhiteSpace(trailDto.Name))
-			{
-				ModelState.AddModelError(nameof(trailDto.Name), $"(custom message!) {nameof(trailDto.Name)} cannot be null, empty or white space.");
-			}
+			//if (string.IsNullOrWhiteSpace(trailDto.Name))
+			//{
+			//	ModelState.AddModelError(nameof(trailDto.Name), $"(custom message!) {nameof(trailDto.Name)} cannot be null, empty or white space.");
+			//}
 
 			var region = await regionRepository.GetAsync(trailDto.RegionId);
 			if (region == null)
@@ -127,15 +129,15 @@ namespace NZTrails.API.Controllers
 
 		private async Task<bool> ValidateUpdateTrailAsync(UpdateTrailDto trailDto)
 		{
-			if (trailDto == null)
-			{
-				ModelState.AddModelError(nameof(trailDto), $"(custom message!) Trail data is required.");
-			}
+			//if (trailDto == null)
+			//{
+			//	ModelState.AddModelError(nameof(trailDto), $"(custom message!) Trail data is required.");
+			//}
 
-			if (string.IsNullOrWhiteSpace(trailDto.Name))
-			{
-				ModelState.AddModelError(nameof(trailDto.Name), $"(custom message!) {nameof(trailDto.Name)} cannot be null, empty or white space.");
-			}
+			//if (string.IsNullOrWhiteSpace(trailDto.Name))
+			//{
+			//	ModelState.AddModelError(nameof(trailDto.Name), $"(custom message!) {nameof(trailDto.Name)} cannot be null, empty or white space.");
+			//}
 
 			var region = await regionRepository.GetAsync(trailDto.RegionId);
 			if (region == null)
