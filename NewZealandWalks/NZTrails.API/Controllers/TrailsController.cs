@@ -77,7 +77,7 @@ namespace NZTrails.API.Controllers
 		// PUT: api/Trails/5
 		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
 		[HttpPut("{id:guid}")]
-		[Authorize(Roles = "writter")]
+		[Authorize(Roles = "writer")]
 		public async Task<IActionResult> PutTrail(Guid id, UpdateTrailDto updateTrailDto)
 		{
 			//Validating FK with the context + fluentValidator for properties.
@@ -99,7 +99,7 @@ namespace NZTrails.API.Controllers
 
 		// DELETE: api/Trails/5
 		[HttpDelete("{id:guid}")]
-		[Authorize(Roles = "writter")]
+		[Authorize(Roles = "writer")]
 		public async Task<IActionResult> DeleteTrail(Guid id)
 		{
 			var trail = await trailRepository.DeleteAsync(id);

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NZWalks.API.Data;
 
@@ -11,9 +12,10 @@ using NZWalks.API.Data;
 namespace NZTrails.API.Migrations
 {
     [DbContext(typeof(NZTrailsDbContext))]
-    partial class NZTrailsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220713185932_AddingUsersAndRoles")]
+    partial class AddingUsersAndRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

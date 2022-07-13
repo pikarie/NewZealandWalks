@@ -62,8 +62,8 @@ builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 builder.Services.AddScoped<ITrailRepository, TrailRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ITokenHandler, NZTrails.API.Repositories.TokenHandler>();
-
-builder.Services.AddSingleton<IUserRepository, StaticUserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddSingleton<IUserRepository, StaticUserRepository>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

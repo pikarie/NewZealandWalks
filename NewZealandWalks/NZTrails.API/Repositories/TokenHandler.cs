@@ -24,8 +24,9 @@ namespace NZTrails.API.Repositories
 				new Claim(ClaimTypes.Email, user.Email),
 			};
 
-			user.Roles.ForEach(role => {
-				claims.Add(new Claim(ClaimTypes.Role, role));
+			user.Roles.ForEach(role =>
+			{
+				claims.Add(new Claim(ClaimTypes.Role, role.Name));
 			});
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));

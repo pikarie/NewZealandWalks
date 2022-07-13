@@ -69,7 +69,7 @@ namespace NZTrails.API.Controllers
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id:guid}")]
-        [Authorize(Roles = "writter")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> PutReview(Guid id, UpdateReviewDto updateReviewDto)
         {
             //TODO: add validation
@@ -86,7 +86,7 @@ namespace NZTrails.API.Controllers
 
         // DELETE: api/Reviews/5
         [HttpDelete("{id:guid}")]
-        [Authorize(Roles = "writter")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> DeleteReview(Guid id)
         {
             var review = await reviewRepository.DeleteAsync(id);

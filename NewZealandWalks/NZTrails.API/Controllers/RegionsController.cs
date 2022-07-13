@@ -70,7 +70,7 @@ namespace NZTrails.API.Controllers
 		}
 
 		[HttpPost]
-		[Authorize(Roles = "writter")]
+		[Authorize(Roles = "writer")]
 		public async Task<IActionResult> AddRegionAsync(AddRegionDto addRegionDto)
 		{
 			var region = mapper.Map<Region>(addRegionDto);
@@ -90,7 +90,7 @@ namespace NZTrails.API.Controllers
 
 		[HttpPut]
 		[Route("{id:guid}")]
-		[Authorize(Roles = "writter")]
+		[Authorize(Roles = "writer")]
 		public async Task<IActionResult> UpdateRegionAsync(Guid id, UpdateRegionDto updateRegionDto)
 		{
 			//Example using thte manually private validation method vs using FluentValidation
@@ -112,7 +112,7 @@ namespace NZTrails.API.Controllers
 
 		[HttpDelete]
 		[Route("{id:guid}")]
-		[Authorize(Roles = "writter")]
+		[Authorize (Roles = "writer")]
 		public async Task<IActionResult> DeleteRegionAsync(Guid id)
 		{
 			var region = await regionRepository.DeleteAsync(id);

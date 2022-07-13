@@ -23,3 +23,28 @@ INSERT INTO Reviews (Id, Username, Email, Rating, LikedComment, DislikedComment,
 	('11512487-f54b-4a63-873c-555b4984cf8a', 'Max', 'max@gmail.com', 68, NULL, 'A lot of trash on this trail :(.','b38d0b27-f823-4c98-8db5-1d8f4be08cc6'),
 	('ec986594-b42b-43a1-a5bd-958e573b9507', 'Camellia', 'camellia123@gmail.com', 95, 'The optional path behind the waterfall was so much fun!', NULL,'24209e64-0703-4bea-a1de-fdffae87d8c0'),
 	('c8baa28e-2b9e-49f5-a96b-eeb5d139efca', 'Egbert Winterstorm', NULL, 52, 'A little bit too hard for my taste.', NULL,'24209e64-0703-4bea-a1de-fdffae87d8c0');
+
+--Seed for users and roles, video 101/101
+
+SELECT * FROM [dbo].[Users]
+SELECT * FROM [dbo].[Roles]
+SELECT * FROM [dbo].[Users_Roles]
+
+--Insert Users
+INSERT INTO Users (Id, Username, Email, Password, FirstName, LastName) VALUES
+	('aaaaaaaa-b9e9-4e1b-b89c-362c14c24ff1', 'username1', 'username1@user.com', 'password1', 'FirstNameUser1', 'LastNameUser1'),
+	('bbbbbbbb-b9e9-4e1b-b89c-362c14c24ff1', 'username2', 'username2@user.com', 'password2', 'FirstNameUser2', 'LastNameUser2');
+
+--Insert Roles
+INSERT INTO Roles (Id, Name) VALUES
+	('663EC6C3-E369-47E6-87C5-1CCB8B7DFA33', 'reader'),
+	('B7717016-1BDF-475D-9916-EB8BB22769D3', 'writer');
+
+
+--Insert Users_Roles
+INSERT INTO Users_Roles (Id, UserId, RoleId) VALUES
+	('7c2d51cb-c878-49a6-8392-f5ee28bd3602', 'aaaaaaaa-b9e9-4e1b-b89c-362c14c24ff1', '663EC6C3-E369-47E6-87C5-1CCB8B7DFA33'),
+	('13cbebb1-5f80-43c5-a7af-292e05e62956', 'bbbbbbbb-b9e9-4e1b-b89c-362c14c24ff1', '663EC6C3-E369-47E6-87C5-1CCB8B7DFA33'),
+	('c1d8925c-aa2f-404e-af23-e5a6f1774c8f', 'bbbbbbbb-b9e9-4e1b-b89c-362c14c24ff1', 'B7717016-1BDF-475D-9916-EB8BB22769D3');
+
+

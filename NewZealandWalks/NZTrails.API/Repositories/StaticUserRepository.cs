@@ -16,7 +16,10 @@ namespace NZTrails.API.Repositories
 				Password = "pAsswOrd#1",
 				Roles = new()
 				{
-					"reader"
+					new Role()
+					{
+						Name = "reader"
+					}
 				}
 			},
 			new()
@@ -29,13 +32,19 @@ namespace NZTrails.API.Repositories
 				Password = "pAsswOrd#1",
 				Roles = new()
 				{
-					"reader",
-					"writter"
+					new Role()
+					{
+						Name = "reader"
+					},
+					new Role()
+					{
+						Name = "writter"
+					}
 				}
 			}
 		};
 
-		public async Task<User> AuthenticateAsync(string username, string password)
+		public async Task<User?> AuthenticateAsync(string username, string password)
 		{
 			var user = Users.Find(x => x.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase) && x.Password == password);
 			return user;
