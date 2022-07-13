@@ -53,6 +53,8 @@ namespace NZTrails.API.Controllers
         [HttpPost]
         public async Task<ActionResult<ReviewDto>> PostReview(AddReviewDto addReviewDto)
         {
+            //TODO: add validation
+
             var review = mapper.Map<Review>(addReviewDto);
             var newReview = await reviewRepository.AddAsync(review);
             var reviewDto = mapper.Map<ReviewDto>(newReview);
@@ -65,6 +67,8 @@ namespace NZTrails.API.Controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> PutReview(Guid id, UpdateReviewDto updateReviewDto)
         {
+            //TODO: add validation
+
             var updatedReview = await reviewRepository.UpdateAsync(id, updateReviewDto);
 
             if (updatedReview == null)
