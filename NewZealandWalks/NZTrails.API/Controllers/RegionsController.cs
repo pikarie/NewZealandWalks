@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NZTrails.API.Models.Dto;
 using NZTrails.API.Repositories;
@@ -22,6 +23,7 @@ namespace NZTrails.API.Controllers
 		}
 
 		[HttpGet]
+		[Authorize(Roles = "reader")]
 		public async Task<IActionResult> GetAllRegionsAsync()
 		{
 			var regions = await regionRepository.GetAllAsync();
@@ -52,6 +54,7 @@ namespace NZTrails.API.Controllers
 		[HttpGet]
 		[Route("{id:guid}")]
 		[ActionName(nameof(GetRegionAsync))]
+		[Authorize(Roles = "reader")]
 		public async Task<IActionResult> GetRegionAsync(Guid id)
 		{
 			var region = await regionRepository.GetAsync(id);
@@ -67,6 +70,7 @@ namespace NZTrails.API.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "writter")]
 		public async Task<IActionResult> AddRegionAsync(AddRegionDto addRegionDto)
 		{
 			var region = mapper.Map<Region>(addRegionDto);
@@ -86,6 +90,7 @@ namespace NZTrails.API.Controllers
 
 		[HttpPut]
 		[Route("{id:guid}")]
+		[Authorize(Roles = "writter")]
 		public async Task<IActionResult> UpdateRegionAsync(Guid id, UpdateRegionDto updateRegionDto)
 		{
 			//Example using thte manually private validation method vs using FluentValidation
@@ -107,6 +112,7 @@ namespace NZTrails.API.Controllers
 
 		[HttpDelete]
 		[Route("{id:guid}")]
+		[Authorize(Roles = "writter")]
 		public async Task<IActionResult> DeleteRegionAsync(Guid id)
 		{
 			var region = await regionRepository.DeleteAsync(id);

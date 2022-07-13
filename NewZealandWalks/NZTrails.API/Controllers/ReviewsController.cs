@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NZTrails.API.Models.Dto;
 using NZTrails.API.Repositories;
@@ -21,6 +22,7 @@ namespace NZTrails.API.Controllers
 
         // GET: api/Reviews
         [HttpGet]
+        [Authorize(Roles = "reader")]
         public async Task<ActionResult<IEnumerable<ReviewDto>>> GetReviews()
         {
             var reviews = await reviewRepository.GetAllAsync();
@@ -36,6 +38,7 @@ namespace NZTrails.API.Controllers
         // GET: api/Reviews/5
         [HttpGet("{id:guid}")]
         [ActionName(nameof(GetReview))]
+        [Authorize(Roles = "reader")]
         public async Task<ActionResult<ReviewDto>> GetReview(Guid id)
         {
             var review = await reviewRepository.GetAsync(id);
@@ -51,6 +54,7 @@ namespace NZTrails.API.Controllers
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "reader")]
         public async Task<ActionResult<ReviewDto>> PostReview(AddReviewDto addReviewDto)
         {
             //TODO: add validation
@@ -65,6 +69,7 @@ namespace NZTrails.API.Controllers
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "writter")]
         public async Task<IActionResult> PutReview(Guid id, UpdateReviewDto updateReviewDto)
         {
             //TODO: add validation
@@ -81,6 +86,7 @@ namespace NZTrails.API.Controllers
 
         // DELETE: api/Reviews/5
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "writter")]
         public async Task<IActionResult> DeleteReview(Guid id)
         {
             var review = await reviewRepository.DeleteAsync(id);
